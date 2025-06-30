@@ -1,0 +1,51 @@
+import { Request, Response, NextFunction } from 'express'
+import { successResponse, errorResponse } from '../utils'
+import { PageService } from '../services'
+
+export const createPage = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const page = await PageService.createPage(req.body)
+    successResponse(res, page, 'Page created', 201)
+  } catch (err) {
+    next(err)
+  }
+}
+
+export const getPageBySlug = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const page = await PageService.getPageBySlug(req.params.slug)
+    if (!page) {
+      errorResponse(res, 'Page not found', 404, 'PageNotFound')
+      return
+    }
+    successResponse(res, page, 'Page fetched')
+  } catch (err) {
+    next(err)
+  }
+}
+
+export const updatePage = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const page = await PageService.updatePage(req.params.id, req.body)
+    if (!page) {
+      errorResponse(res, 'Page not found', 404, 'PageNotFound')
+      return
+    }
+    successResponse(res, page, 'Page updated')
+  } catch (err) {
+    next(err)
+  }
+}
+
+export const deletePage = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await PageService.deletePage(req.params.id)
+    if (!result) {
+      errorResponse(res, 'Page not found', 404, 'PageNotFound')
+      return
+    }
+    successResponse(res, null, 'Page deleted')
+  } catch (err) {
+    next(err)
+  }
+}

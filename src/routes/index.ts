@@ -1,0 +1,7 @@
+export { default as authRoutes } from './auth.routes'
+export { default as blogRoutes } from './blog.routes'
+export { default as metaRoutes } from './meta.routes'
+export { default as menuRoutes } from './menu.routes'
+export { default as pageRoutes } from './page.routes'
+export { default as mediaRoutes } from './media.routes'
+export { default as contactRoutes } from './contact.routes'
