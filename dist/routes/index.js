@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.contactRoutes = exports.mediaRoutes = exports.pageRoutes = exports.menuRoutes = exports.metaRoutes = exports.blogRoutes = exports.authRoutes = void 0;
+var auth_routes_1 = require("./auth.routes");
+Object.defineProperty(exports, "authRoutes", { enumerable: true, get: function () { return __importDefault(auth_routes_1).default; } });
+var blog_routes_1 = require("./blog.routes");
+Object.defineProperty(exports, "blogRoutes", { enumerable: true, get: function () { return __importDefault(blog_routes_1).default; } });
+var meta_routes_1 = require("./meta.routes");
+Object.defineProperty(exports, "metaRoutes", { enumerable: true, get: function () { return __importDefault(meta_routes_1).default; } });
+var menu_routes_1 = require("./menu.routes");
+Object.defineProperty(exports, "menuRoutes", { enumerable: true, get: function () { return __importDefault(menu_routes_1).default; } });
+var page_routes_1 = require("./page.routes");
+Object.defineProperty(exports, "pageRoutes", { enumerable: true, get: function () { return __importDefault(page_routes_1).default; } });
+var media_routes_1 = require("./media.routes");
+Object.defineProperty(exports, "mediaRoutes", { enumerable: true, get: function () { return __importDefault(media_routes_1).default; } });
+var contact_routes_1 = require("./contact.routes");
+Object.defineProperty(exports, "contactRoutes", { enumerable: true, get: function () { return __importDefault(contact_routes_1).default; } });
