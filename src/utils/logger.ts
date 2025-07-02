@@ -69,10 +69,8 @@ if (!isServerless) {
 }
 
 // Create logger
-const logger = winston.createLogger({
+export const logger = winston.createLogger({
   level: 'info',
   format: winston.format.json(),
   transports
 })
-
-export default logger
