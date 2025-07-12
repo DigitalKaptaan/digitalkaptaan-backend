@@ -133,3 +133,7 @@
 {"level":"info","message":"GET /api/pages/home","service":"backend","timestamp":"2025-07-12 17:29:05"}
 {"level":"info","message":"GET /api/pages/home","service":"backend","timestamp":"2025-07-12 17:29:25"}
 {"level":"info","message":"GET /api/pages/home","service":"backend","timestamp":"2025-07-12 17:29:36"}
+{"level":"info","message":"GET /","service":"backend","timestamp":"2025-07-12 17:32:34"}
+{"level":"info","message":"GET /favicon.ico","service":"backend","timestamp":"2025-07-12 17:32:34"}
+{"level":"info","message":"GET /","service":"backend","timestamp":"2025-07-12 17:32:36"}
+{"level":"info","message":"GET /","service":"backend","timestamp":"2025-07-12 17:32:37"}
