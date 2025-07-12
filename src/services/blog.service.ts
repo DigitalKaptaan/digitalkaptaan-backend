@@ -31,5 +31,9 @@ export const BlogService = {
 
   deleteById: async (id: string) => {
     return await Blog.findByIdAndDelete(id)
+  },
+
+  getLatestBlogs: async (limit = 3) => {
+    return Blog.find().sort({ createdAt: -1 }).limit(limit).lean()
   }
 }
