@@ -120,3 +120,16 @@
 {"level":"info","message":"GET /api/pages/home","service":"backend","timestamp":"2025-07-12 17:23:13"}
 {"level":"info","message":"GET /api/menus/footer-nav","service":"backend","timestamp":"2025-07-12 17:23:13"}
 {"level":"info","message":"GET /api/contact","service":"backend","timestamp":"2025-07-12 17:23:13"}
+{"level":"info","message":"GET /api/meta/home","service":"backend","timestamp":"2025-07-12 17:27:04"}
+{"level":"info","message":"GET /api/menus/main-nav","service":"backend","timestamp":"2025-07-12 17:27:04"}
+{"level":"info","message":"GET /api/pages/home","service":"backend","timestamp":"2025-07-12 17:27:04"}
+{"level":"info","message":"GET /api/menus/footer-nav","service":"backend","timestamp":"2025-07-12 17:27:04"}
+{"level":"info","message":"GET /api/contact","service":"backend","timestamp":"2025-07-12 17:27:04"}
+{"level":"info","message":"GET /api/meta/home","service":"backend","timestamp":"2025-07-12 17:27:05"}
+{"level":"info","message":"GET /api/menus/main-nav","service":"backend","timestamp":"2025-07-12 17:27:05"}
+{"level":"info","message":"GET /api/pages/home","service":"backend","timestamp":"2025-07-12 17:27:05"}
+{"level":"info","message":"GET /api/menus/footer-nav","service":"backend","timestamp":"2025-07-12 17:27:05"}
+{"level":"info","message":"GET /api/contact","service":"backend","timestamp":"2025-07-12 17:27:05"}
+{"level":"info","message":"GET /api/pages/home","service":"backend","timestamp":"2025-07-12 17:29:05"}
+{"level":"info","message":"GET /api/pages/home","service":"backend","timestamp":"2025-07-12 17:29:25"}
+{"level":"info","message":"GET /api/pages/home","service":"backend","timestamp":"2025-07-12 17:29:36"}
