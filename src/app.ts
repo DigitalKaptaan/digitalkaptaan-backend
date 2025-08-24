@@ -21,36 +21,34 @@ dotenv.config()
 const app: Application = express()
 
 const allowedOrigins = [
-  'http://localhost:3000', // local dev
-  'https://www.digitalkaptaan.com', // production frontend
-  'https://codewithsachin.in' // production frontend
+  'http://localhost:3000',
+  'https://digitalkaptaan.com',
+  'https://www.digitalkaptaan.com',
+  'https://codewithsachin.in',
+  'https://www.codewithsachin.in'
 ]
-
 // Middlewares
 app.use(express.json())
 app.use(helmet())
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true)
+const corsOptions = {
+  origin: (origin: string | undefined, callback: any) => {
+    if (!origin) return callback(null, true) // allow server-to-server, Postman
+    const normalizedOrigin = origin.replace(/\/$/, '') // remove trailing slash
+    if (allowedOrigins.includes(normalizedOrigin)) {
+      return callback(null, true)
+    } else {
+      return callback(new Error(`CORS not allowed from ${origin}`), false)
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With']
+}
 
-      const normalizedOrigin = origin.replace(/\/$/, '')
-      if (allowedOrigins.includes(normalizedOrigin)) {
-        return callback(null, true)
-      } else {
-        console.error(`Blocked CORS request from: ${origin}`)
-        return callback(new Error(`CORS not allowed from ${origin}`), false)
-      }
-    },
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With']
-  })
-)
-
+app.use(cors(corsOptions))
 // handle preflight requests
-app.options('*', cors())
+// app.options('*', cors(corsOptions))
 
 app.use(morgan('dev'))
 app.use(express.json())
