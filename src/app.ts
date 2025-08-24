@@ -23,7 +23,7 @@ const app: Application = express()
 const allowedOrigins = [
   'http://localhost:3000', // local dev
   'https://www.digitalkaptaan.com', // production frontend
-  'https://codewithsachin.in/' // production frontend
+  'https://codewithsachin.in' // production frontend
 ]
 
 // Middlewares
