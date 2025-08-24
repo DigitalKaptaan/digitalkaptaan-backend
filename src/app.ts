@@ -20,10 +20,28 @@ dotenv.config()
 // const app = express()
 const app: Application = express()
 
+const allowedOrigins = [
+  'http://localhost:3000', // local dev
+  'https://www.digitalkaptaan.com' // production frontend
+]
+
 // Middlewares
 app.use(express.json())
 app.use(helmet())
-app.use(cors({ origin: ['http://localhost:3000', 'https://www.digitalkaptaan.com'] }))
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true)
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true)
+      } else {
+        return callback(new Error(`CORS not allowed from ${origin}`), false)
+      }
+    },
+    credentials: true
+  })
+)
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
