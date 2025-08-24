@@ -16,7 +16,7 @@ export const getPageBySlug = async (req: Request, res: Response, next: NextFunct
     let page: any
     let latestBlogs: any = undefined
 
-    if (req.params.slug === 'our-services') {
+    if (['our-services', 'home'].includes(req.params.slug)) {
       ;[page, latestBlogs] = await Promise.all([
         PageService.getPageBySlug(req.params.slug),
         BlogService.getLatestBlogs(3)
