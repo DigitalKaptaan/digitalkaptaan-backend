@@ -34,21 +34,35 @@ app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true)
-      if (allowedOrigins.includes(origin)) {
+
+      const normalizedOrigin = origin.replace(/\/$/, '')
+      if (allowedOrigins.includes(normalizedOrigin)) {
         return callback(null, true)
       } else {
+        console.error(`Blocked CORS request from: ${origin}`)
         return callback(new Error(`CORS not allowed from ${origin}`), false)
       }
     },
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With']
   })
 )
+
+// handle preflight requests
+app.options('*', cors())
+
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(compression())
 app.use(requestLogger)
+
+app.use((req, _res, next) => {
+  console.log('Request origin:', req.headers.origin)
+  next()
+})
 
 // Health check
 app.get('/', (_req, res: any) => res.send('API is running 🚀'))
