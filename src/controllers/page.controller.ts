@@ -13,12 +13,17 @@ export const createPage = async (req: Request, res: Response, next: NextFunction
 
 export const getPageBySlug = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // const page = await PageService.getPageBySlug(req.params.slug)
+    let page: any
+    let latestBlogs: any = undefined
 
-    const [page, latestBlogs] = await Promise.all([
-      PageService.getPageBySlug(req.params.slug),
-      BlogService.getLatestBlogs(3)
-    ])
+    if (req.params.slug === 'our-services') {
+      ;[page, latestBlogs] = await Promise.all([
+        PageService.getPageBySlug(req.params.slug),
+        BlogService.getLatestBlogs(3)
+      ])
+    } else {
+      page = await PageService.getPageBySlug(req.params.slug)
+    }
 
     if (!page) {
       errorResponse(res, 'Page not found', 404, 'PageNotFound')
@@ -27,7 +32,7 @@ export const getPageBySlug = async (req: Request, res: Response, next: NextFunct
 
     const enrichedPage = {
       ...(page.toObject?.() ?? page),
-      latestBlogs
+      ...(latestBlogs ? { latestBlogs } : {})
     }
 
     successResponse(res, enrichedPage, 'Page fetched')
