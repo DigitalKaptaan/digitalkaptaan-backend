@@ -17,23 +17,35 @@ export const BlogService = {
     return await blog.save()
   },
 
-  findAllPublished: async () => {
-    return await Blog.find({ status: 'published' }).sort({ createdAt: -1 })
+  findAllPublished: async (page: number, pageSize: number) => {
+    const skip = (page - 1) * pageSize
+    return await Blog.find({ status: 'published' })
+      .skip(skip)
+      .limit(pageSize)
+      .sort({ createdAt: -1 })
+  },
+  findAllBlogs: async (page: number, pageSize: number) => {
+    const skip = (page - 1) * pageSize
+    const [data, total] = await Promise.all([
+      Blog.find().skip(skip).limit(pageSize).sort({ createdAt: -1 }),
+      Blog.countDocuments()
+    ])
+
+    return { data, total }
   },
 
   findBySlug: async (slug: string) => {
     return await Blog.findOne({ slug, status: 'published' })
   },
+  findByAllSlug: async (slug: string) => {
+    return await Blog.findOne({ slug })
+  },
 
-  updateById: async (id: string, data: Partial<IBlog>) => {
-    return await Blog.findByIdAndUpdate(id, data, { new: true })
+  updateBySlug: async (slug: string, data: Partial<IBlog>) => {
+    return await Blog.findOneAndUpdate({ slug }, data, { new: true })
   },
 
   deleteById: async (id: string) => {
     return await Blog.findByIdAndDelete(id)
-  },
-
-  getLatestBlogs: async (limit = 3) => {
-    return Blog.find().sort({ createdAt: -1 }).limit(limit).lean()
   }
 }

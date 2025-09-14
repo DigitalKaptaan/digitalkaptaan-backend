@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { successResponse, errorResponse } from '../utils'
-import { BlogService, PageService } from '../services'
+import { PageService } from '../services'
 
 export const createPage = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -13,29 +13,12 @@ export const createPage = async (req: Request, res: Response, next: NextFunction
 
 export const getPageBySlug = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    let page: any
-    let latestBlogs: any = undefined
-
-    if (['our-services', 'home'].includes(req.params.slug)) {
-      ;[page, latestBlogs] = await Promise.all([
-        PageService.getPageBySlug(req.params.slug),
-        BlogService.getLatestBlogs(3)
-      ])
-    } else {
-      page = await PageService.getPageBySlug(req.params.slug)
-    }
-
+    const page = await PageService.getPageBySlug(req.params.slug)
     if (!page) {
       errorResponse(res, 'Page not found', 404, 'PageNotFound')
       return
     }
-
-    const enrichedPage = {
-      ...(page.toObject?.() ?? page),
-      ...(latestBlogs ? { latestBlogs } : {})
-    }
-
-    successResponse(res, enrichedPage, 'Page fetched')
+    successResponse(res, page, 'Page fetched')
   } catch (err) {
     next(err)
   }
