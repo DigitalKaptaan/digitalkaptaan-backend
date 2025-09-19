@@ -16,11 +16,10 @@ const router = Router()
 
 // Public routes
 router.get('/', getAllPublishedBlogs)
-router.get('/:slug', getBlogBySlug)
-router.get('/admin/by/:slug', authenticate, authorizeRoles(ROLES.ADMIN), getAllBlogBySlug)
 
-// Admin-only routes
+// Admin-only routes (put before `/:slug`)
 router.get('/admin/blogs', authenticate, authorizeRoles(ROLES.ADMIN), getAllBlogs)
+router.get('/admin/by/:slug', authenticate, authorizeRoles(ROLES.ADMIN), getAllBlogBySlug)
 router.post(
   '/admin/create',
   authenticate,
@@ -37,5 +36,8 @@ router.put(
   updateBlog
 )
 router.delete('/:id', authenticate, authorizeRoles(ROLES.ADMIN), deleteBlog)
+
+// Dynamic route should come last
+router.get('/:slug', getBlogBySlug)
 
 export default router
