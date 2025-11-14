@@ -20,6 +20,7 @@ router.get('/', getAllPublishedBlogs)
 // Admin-only routes (put before `/:slug`)
 router.get('/admin/blogs', authenticate, authorizeRoles(ROLES.ADMIN), getAllBlogs)
 router.get('/admin/by/:slug', authenticate, authorizeRoles(ROLES.ADMIN), getAllBlogBySlug)
+
 router.post(
   '/admin/create',
   authenticate,
