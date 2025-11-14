@@ -17,8 +17,9 @@ const fileFilter = (_req: Request, file: Express.Multer.File, cb: FileFilterCall
 // Storage configuration
 const storage: StorageEngine = multer.diskStorage({
   destination: (_req: Request, _file, cb) => {
-    cb(null, './public/temp')
+    cb(null, '/tmp')
   },
+  // cb(null,  './public/temp')
   filename: (_req: Request, file, cb) => {
     const ext = path.extname(file.originalname)
     const filename = `${Date.now()}${ext}`
